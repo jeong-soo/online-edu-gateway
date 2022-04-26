@@ -17,8 +17,5 @@ class AuthUtilTest {
                 .withClaim("typ", List.of("ADMIN", "USER", "LECTURER"))
                 .sign(Algorithm.HMAC256(secret));
         System.out.println(token);
-        System.out.println(AuthUtil.isValid(token, secret, "ADMIN"));
-        System.out.println(
-                AuthUtil.isValid("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXAiOlsiQURNSU4iLCJVU0VSIiwiTEVDVFVSRVIiXSwiZXhwIjoxNjUwOTA0NzAyfQ.6NxrTUCl5f4IF96qBQTLHtiKrHrua5TIwUEtk7OeUck", secret, "ADMIN"));
     }
 }
