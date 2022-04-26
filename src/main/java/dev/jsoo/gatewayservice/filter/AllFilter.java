@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UserFilter extends AbstractGatewayFilterFactory<UserFilter.Config> {
+public class AllFilter extends AbstractGatewayFilterFactory<AllFilter.Config> {
     private Environment env;
 
-    public UserFilter(Environment env) {
+    public AllFilter(Environment env) {
         super(Config.class);
         this.env = env;
     }
@@ -21,7 +21,7 @@ public class UserFilter extends AbstractGatewayFilterFactory<UserFilter.Config> 
     public static class Config {}
 
     @Override
-    public GatewayFilter apply(UserFilter.Config config) {
-        return FilterUtil.getFilter(env.getProperty("token.secret"), AuthType.USER);
+    public GatewayFilter apply(Config config) {
+        return FilterUtil.getFilter(env.getProperty("token.secret"), AuthType.USER, AuthType.LECTURER, AuthType.ADMIN);
     }
 }

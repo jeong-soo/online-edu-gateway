@@ -14,7 +14,7 @@ class AuthUtilTest {
         String secret = "www.codestates.com";
         String token = JWT.create()
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                .withClaim("typ", List.of("ADMIN", "USER", "LECTURER"))
+                .withClaim("typ", List.of("USER", "LECTURER"))
                 .sign(Algorithm.HMAC256(secret));
         System.out.println(token);
     }

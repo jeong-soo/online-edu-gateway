@@ -17,7 +17,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/login
+            - Path=/users/login
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -25,7 +25,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/join
+            - Path=/users/join
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -33,7 +33,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/register
+            - Path=/users/register
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -42,25 +42,25 @@ spring:
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
-            - Path=/lectures/{lectureId}/contents
+            - Path=/lectures/{lectureId}/rating
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
+            - AdminFilter
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
-            - Path=/lectures/{lectureId}/score
+            - Path=/lectures
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
+            - AllFilter
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
-            - Path=/lectures/{lectureId}/rating/{ratingId}
+            - Path=/lectures/{lectureId}/enrolment
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
@@ -74,34 +74,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - LecturerFilter
-        - id: lectures-service
-          uri: lb://LECTURES-SERVICE
-          predicates:
-            - Path=/lectures
-            - Method=GET
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - UserFilter
-        - id: lectures-service
-          uri: lb://LECTURES-SERVICE
-          predicates:
-            - Path=/lectures/{lectureId}/enrolment
-            - Method=POST
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
-        - id: lectures-service
-          uri: lb://LECTURES-SERVICE
-          predicates:
-            - Path=/lectures/{lectureId}/matching
-            - Method=POST
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - AdminFilter
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
@@ -114,7 +87,7 @@ spring:
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
-            - Path=/lectures/{lectureId}/score/{userId}
+            - Path=/lectures/{lectureId}/score
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -123,30 +96,12 @@ spring:
         - id: lectures-service
           uri: lb://LECTURES-SERVICE
           predicates:
-            - Path=/lectures/rating
-            - Method=POST
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
-        - id: lectures-service
-          uri: lb://LECTURES-SERVICE
-          predicates:
-            - Path=/lectures/{lecturerId}
-            - Method=PATCH
+            - Path=/lectures
+            - Method=POST, PATCH
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
-        - id: lectures-service
-          uri: lb://LECTURES-SERVICE
-          predicates:
-            - Path=/lectures
-            - Method=POST
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
           predicates:
@@ -155,7 +110,16 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
+            - AllFilter
+        - id: community-service
+          uri: lb://COMMUNITY-SERVICE
+          predicates:
+            - Path=/articles
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
           predicates:
@@ -165,15 +129,5 @@ spring:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
-        - id: community-service
-          uri: lb://COMMUNITY-SERVICE
-          predicates:
-            - Path=/articles
-            - Method=POST
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - UserFilter
-
 token:
   secret: www.codestates.com
