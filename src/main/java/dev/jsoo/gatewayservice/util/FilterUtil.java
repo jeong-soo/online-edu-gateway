@@ -20,12 +20,8 @@ public class FilterUtil {
                 return getError(exchange, "no authorization header", HttpStatus.UNAUTHORIZED);
 
             String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-            try {
-                if(!isValid(authorizationHeader.replace("Bearer ", ""), secret, types))
-                    return getError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
-            } catch (Exception e) {
+            if(!isValid(authorizationHeader.replace("Bearer ", ""), secret, types))
                 return getError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
-            }
             return chain.filter(exchange);
         });
     }

@@ -11,13 +11,17 @@ import java.util.Arrays;
 
 public class AuthUtil {
     private AuthUtil(){};
-    public static boolean isValid(final String token, final String secret, final AuthType... types) throws Exception {
-        DecodedJWT jwt = JWT.decode(token);
-        AuthType[] typs = jwt.getClaim("typ").asArray(AuthType.class);
-        if(!Arrays.stream(typs).anyMatch((s) -> ArrayUtils.contains(types, s))) return false;
-        Algorithm algorithm = Algorithm.HMAC256(secret);
-        JWTVerifier verifier = JWT.require(algorithm).build();
-        verifier.verify(jwt);
+    public static boolean isValid(final String token, final String secret, final AuthType... types) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            AuthType[] typs = jwt.getClaim("typ").asArray(AuthType.class);
+            if(!Arrays.stream(typs).anyMatch((s) -> ArrayUtils.contains(types, s))) return false;
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            verifier.verify(jwt);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 }
