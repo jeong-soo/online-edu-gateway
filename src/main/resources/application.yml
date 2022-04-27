@@ -21,7 +21,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -29,7 +28,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -37,7 +35,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -46,7 +43,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -55,7 +51,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -64,7 +59,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -73,7 +67,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -82,7 +75,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -91,7 +83,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -100,7 +91,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -109,7 +99,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - UserFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -118,7 +107,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -127,7 +115,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - LecturerFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -136,7 +123,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - LecturerFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -145,7 +131,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - UserFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -154,7 +139,6 @@ spring:
             - Method=PATCH
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
@@ -163,7 +147,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AdminFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -172,7 +155,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -181,7 +163,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -190,7 +171,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -199,7 +179,6 @@ spring:
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -208,7 +187,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -217,7 +195,6 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -226,7 +203,6 @@ spring:
             - Method=PATCH
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
         - id: community-service
           uri: lb://COMMUNITY-SERVICE
@@ -235,7 +211,6 @@ spring:
             - Method=PATCH
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AllFilter
 token:
   secret: www.codestates.com
