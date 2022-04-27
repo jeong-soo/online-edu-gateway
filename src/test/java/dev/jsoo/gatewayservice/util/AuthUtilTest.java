@@ -15,11 +15,11 @@ class AuthUtilTest {
         String secret = "www.codestates.com";
         String token = JWT.create()
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                .withClaim("typ", List.of("USER"))
+                .withClaim("typ", List.of("LECTURER"))
                 .sign(Algorithm.HMAC256(secret));
         System.out.println(token);
         try {
-            System.out.println(AuthUtil.isValid(token, secret, AuthType.USER));
+            System.out.println(AuthUtil.isValid(token, secret, AuthType.LECTURER));
         } catch (Exception e) {
             e.printStackTrace();
         }

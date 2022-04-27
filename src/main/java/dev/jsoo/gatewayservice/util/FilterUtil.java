@@ -31,6 +31,8 @@ public class FilterUtil {
                 return getError(exchange, HttpStatus.UNAUTHORIZED);
             } catch(InvalidClaimException e) {
                 return getError(exchange, HttpStatus.FORBIDDEN);
+            } catch (Exception e) {
+                return getError(exchange, HttpStatus.UNAUTHORIZED);
             }
         });
     }
