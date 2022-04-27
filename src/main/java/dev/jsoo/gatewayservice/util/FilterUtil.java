@@ -11,22 +11,31 @@ import reactor.core.publisher.Mono;
 
 import static dev.jsoo.gatewayservice.util.AuthUtil.isValid;
 
+import com.auth0.jwt.exceptions.InvalidClaimException;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+
 public class FilterUtil {
     public static GatewayFilter getFilter(String secret, AuthType... types) {
         return ((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-
             if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION))
-                return getError(exchange, "no authorization header", HttpStatus.UNAUTHORIZED);
+                return getError(exchange, HttpStatus.UNAUTHORIZED);
 
             String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-            if(!isValid(authorizationHeader.replace("Bearer ", ""), secret, types))
-                return getError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
-            return chain.filter(exchange);
+            try {
+                if(!isValid(authorizationHeader.replace("Bearer ", ""), secret, types))
+                    return getError(exchange, HttpStatus.UNAUTHORIZED);
+                return chain.filter(exchange);
+            } catch(JWTCreationException | SignatureVerificationException e) {
+                return getError(exchange, HttpStatus.UNAUTHORIZED);
+            } catch(InvalidClaimException e) {
+                return getError(exchange, HttpStatus.FORBIDDEN);
+            }
         });
     }
 
-    public static Mono<Void> getError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+    public static Mono<Void> getError(ServerWebExchange exchange, HttpStatus httpStatus) {
         ServerHttpResponse response =  exchange.getResponse();
         response.setStatusCode(httpStatus);
         return response.setComplete();

@@ -14,7 +14,9 @@ public class AuthUtil {
     public static boolean isValid(final String token, final String secret, final AuthType... types) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            AuthType[] typs = jwt.getClaim("typ").asArray(AuthType.class);
+            AuthType[] typs = Arrays.stream(jwt.getClaim("typ").asArray(String.class))
+                .map((s) -> AuthType.getAuthType(s))
+                .toArray(AuthType[]::new);
             if(!Arrays.stream(typs).anyMatch((s) -> ArrayUtils.contains(types, s))) return false;
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm).build();
